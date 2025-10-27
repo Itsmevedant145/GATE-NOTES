@@ -1,0 +1,13 @@
+write a porgramm to accept in array elemts from user and find first  largest element in that array  
+
+Q.2 -_>second largest element in array
+
+Q.3 = to  inialize 1 int array with values bet 1-10 & print missing numbers in array
+
+q.4 = to print interesection ,union and diffrence of 2 arrays/sets
+Q.4 = write a porgramm to print dublicate element in array
+Q.5 = wap to reverse in arrya elemtes in original array
+Q.6 = wap to priint each element with frequency count
+Q.7 = wap a porgram with one given int arr and one traget value then find all the parirs in the array 
+for sum = traget value
+Q.8 = wap to seprate all zeros from given arrya and move it to last

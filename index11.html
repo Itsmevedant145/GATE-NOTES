@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test MediaPipe files</title></head>
+<body>
+<script>
+  fetch('/public/mediapipe/hands/hands_solution_packed_assets_loader.js')
+    .then(res => {
+      if (res.ok) {
+        console.log('File fetched successfully');
+        return res.text();
+      } else {
+        throw new Error('File not found');
+      }
+    })
+    .then(text => console.log(text.slice(0, 100))) // print first 100 chars
+    .catch(err => console.error(err));
+</script>
+</body>
+</html>

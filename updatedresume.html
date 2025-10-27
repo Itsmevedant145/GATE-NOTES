@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    div {
+      margin: 10px 0;
+    }
+    input {
+      padding: 8px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    </style>
+</head>
+<body>
+  <section>
+    <div>Name:<input></div>
+    <div>Age:<input></div>
+    <div>Email : <input></div>
+    <button id="submitbtn">submit</button>
+   <section>
+  <div>Name: <input id="name" type="text"></div>
+  <div>Age: <input id="age" type="number"></div>
+  <div>Email: <input id="email" type="text"></div>
+  <button id="submitbtn">Submit</button>
+</section>
+
+<script>
+  const submitBtn = document.getElementById('submitbtn');
+
+  submitBtn.addEventListener('click', function(event) {
+    event.preventDefault(); // prevent default form submission
+    
+    // Clear previous error messages if any (you'll add this logic)
+    
+    // Get input values
+    const name = document.getElementById('name').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const email = document.getElementById('email').value.trim();
+    
+    // Validation flags
+    let valid = true;
+    
+    // Validate Name - not empty
+    if(name === '') {
+      valid = false;
+      // show error next to name input
+    }
+    
+    // Validate Age - number between 1 and 120
+    const ageNum = Number(age);
+    if(age === '' || isNaN(ageNum) || ageNum < 1 || ageNum > 120) {
+      valid = false;
+      // show error next to age input
+    }
+    
+    // Validate Email - contains '@' and '.'
+    if(!email.includes('@') || !email.includes('.')) {
+      valid = false;
+      // show error next to email input
+    }
+    
+    if(valid) {
+      alert('Form submitted successfully!');
+    }
+  });
+</script>
+
+  </section>
+</body>
+</html>

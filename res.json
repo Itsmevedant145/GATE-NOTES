@@ -1,0 +1,84 @@
+{
+  "name": "Your Name",
+  "contact": {
+    "email": "your.email@example.com",
+    "github": "https://github.com/yourusername",
+    "linkedin": "https://linkedin.com/in/yourprofile",
+    "location": "Your City, India",
+    "portfolio": ""
+  },
+  "education": [
+    {
+      "institution": "Your College Name",
+      "degree": "B.Tech in Your Branch",
+      "location": "City",
+      "startYear": 2021,
+      "endYear": 2025,
+      "cgpa": "Your CGPA",
+      "relevantCourses": [
+        "Data Structures",
+        "DBMS",
+        "Operating Systems",
+        "Web Development"
+      ]
+    }
+  ],
+  "skills": {
+    "languages": ["JavaScript", "TypeScript", "C++", "Python"],
+    "web": ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Chart.js"],
+    "tools": ["Git", "Postman", "Redux", "JWT", "Mongoose", "Axios"],
+    "csFundamentals": ["Data Structures & Algorithms", "OOP", "REST APIs"]
+  },
+  "dsa": {
+    "platform": "LeetCode",
+    "problemsSolved": 250,
+    "topics": [
+      "Arrays",
+      "Strings",
+      "Trees",
+      "Dynamic Programming",
+      "Graphs"
+    ]
+  },
+  "projects": [
+    {
+      "title": "Finance Tracker – MERN Stack Personal Finance Manager",
+      "github": "https://github.com/yourusername/finance-tracker",
+      "description": [
+        "Built full-stack web app with user authentication (JWT), CRUD for income/expenses, and dashboard with Chart.js.",
+        "Export income/expense data as Excel files; filter by date/category."
+      ],
+      "techStack": [
+        "React.js",
+        "Redux",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "JWT",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "title": "Habit & Goal Manager",
+      "github": "https://github.com/yourusername/habit-goal-manager",
+      "description": [
+        "Full-featured productivity app to manage long-term goals via daily habits and milestones.",
+        "Features habit tracking, contribution weights, visual streaks, milestone breakdowns.",
+        "Custom dashboard summarizes progress with goal-linking logic."
+      ],
+      "techStack": [
+        "React.js",
+        "Node.js",
+        "MongoDB",
+        "Express",
+        "JWT"
+      ]
+    }
+  ],
+  "additional": [
+    "Built both projects from scratch using end-to-end full-stack implementation.",
+    "Comfortable with API design, protected routes, and state management using Redux.",
+    "Can quickly pick up new tools and technologies as needed."
+  ],
+  "objective": "Frontend or Full Stack Developer roles | Strong product-based teams | Startup/Scale-up tech environment. Open to internships, new grad roles, or direct placement opportunities."
+}
