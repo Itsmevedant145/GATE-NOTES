@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import JuniorDeveloperPortfolio from './JuniorDeveloperPortfolio';
-import Practcie from './Practcie';
+
+
 import ResumeBuilder from './ResumeBuilder';
 import DBMSNotes from './Noes/DBMSNotes'
 import DSANotes from './Noes/DSANotes';
