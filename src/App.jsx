@@ -9,6 +9,7 @@ import TOCCDNotes from './Noes/TOCCDNotes';
 import CAlgoNotes from './Noes/CALGONotes';
 import CNNotes from './Noes/CNNotes';
 import ComplexityTable from './Noes/ComplexityTable';
+import ComplexityToggle from './ComplexityToggle';
 import DiscreteMathNotes from './Noes/DiscreteMathNotes';
 function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -130,9 +131,8 @@ function App() {
       {/* Footer */}
       <footer className="text-center text-gray-500 text-sm py-6 border-t border-white/10">
         © 2025 GATE Prep Portal • Crafted with 💙 for Learners
-        <div className="mt-4">
-          <ComplexityTable />
-        </div>
+       <ComplexityToggle />
+
       </footer>
     </div>
   );
