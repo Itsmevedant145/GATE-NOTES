@@ -18,16 +18,20 @@ function ComplexityToggle() {
       {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="bg-gray-900 text-gray-100 w-11/12 max-w-6xl max-h-[90vh] p-6 rounded-lg overflow-auto shadow-2xl animate-fadeIn">
+          <div className="relative bg-gray-900 text-gray-100 w-11/12 max-w-6xl max-h-[90vh] p-6 rounded-lg overflow-auto shadow-2xl animate-fadeIn">
+            
+            {/* Floating Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute -top-4 -right-4 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg text-lg transition-transform transform hover:scale-110"
+              title="Close"
+            >
+              ✖
+            </button>
+
             {/* Modal Header */}
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Complexity Table</h2>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white text-2xl font-bold"
-              >
-                ✖
-              </button>
+            <div className="flex justify-center mb-4">
+              <h2 className="text-2xl font-bold text-center">Complexity Table</h2>
             </div>
 
             {/* Table */}
@@ -38,7 +42,5 @@ function ComplexityToggle() {
     </>
   );
 }
-
-
 
 export default ComplexityToggle;
