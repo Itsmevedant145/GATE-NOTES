@@ -4,6 +4,8 @@ import { Cpu, ChevronDown, ChevronRight, HardDrive, Lock, Zap, RefreshCw, Layers
 const OSNotes = () => {
   const [expandedSections, setExpandedSections] = useState({});
   const [completedTopics, setCompletedTopics] = useState({});
+  const [showBankerTable, setShowBankerTable] = React.useState(false);
+
 
   const toggleSection = (section) => {
     setExpandedSections(prev => ({
@@ -654,39 +656,50 @@ const OSNotes = () => {
   const progressPercent = (progress / total) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-emerald-50 p-6">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="bg-gradient-to-br from-cyan-600 to-teal-600 p-4 rounded-xl">
-              <Cpu className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-800">Operating System Revision</h1>
-              <p className="text-gray-600 mt-1">Complete Guide for GATE CSE</p>
-            </div>
+  <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-emerald-50 p-6">
+    <div className="max-w-5xl mx-auto">
+      {/* Header */}
+      <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="bg-gradient-to-br from-cyan-600 to-teal-600 p-4 rounded-xl">
+            <Cpu className="w-8 h-8 text-white" />
           </div>
-          
-          {/* Progress Bar */}
-          <div className="mt-6">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-700">Progress</span>
-              <span className="text-sm font-medium text-cyan-600">{progress}/{total} topics</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
-              <div 
-                className="bg-gradient-to-r from-cyan-600 to-teal-600 h-3 rounded-full transition-all duration-300"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
+          <div>
+            <h1 className="text-4xl font-bold text-gray-800">
+              Operating System Revision
+            </h1>
+            <p className="text-gray-600 mt-1">Complete Guide for GATE CSE</p>
           </div>
         </div>
 
-        {/* Topics */}
-        <div className="space-y-4">
-          {topics.map((topic) => (
-            <div key={topic.id} className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-200 hover:shadow-xl">
+        {/* Progress Bar */}
+        <div className="mt-6">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm font-medium text-gray-700">Progress</span>
+            <span className="text-sm font-medium text-cyan-600">
+              {progress}/{total} topics
+            </span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-3">
+            <div
+              className="bg-gradient-to-r from-cyan-600 to-teal-600 h-3 rounded-full transition-all duration-300"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Topics */}
+      <div className="space-y-4">
+        {topics.map((topic) => {
+          // local toggle for formula table in CPU scheduling
+          const [showFormula, setShowFormula] = React.useState(false);
+
+          return (
+            <div
+              key={topic.id}
+              className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-200 hover:shadow-xl"
+            >
               {/* Topic Header */}
               <div
                 onClick={() => toggleSection(topic.id)}
@@ -696,7 +709,9 @@ const OSNotes = () => {
                   <div className="bg-gradient-to-br from-cyan-600 to-teal-600 p-3 rounded-lg text-white">
                     {topic.icon}
                   </div>
-                  <h2 className="text-xl font-bold text-gray-800">{topic.title}</h2>
+                  <h2 className="text-xl font-bold text-gray-800">
+                    {topic.title}
+                  </h2>
                 </div>
                 <div className="flex items-center gap-3">
                   <button
@@ -731,28 +746,201 @@ const OSNotes = () => {
                       </h3>
                       <ul className="space-y-2.5">
                         {section.points.map((point, pidx) => (
-                          <li key={pidx} className="flex gap-3 text-gray-700">
-                            <span className="text-cyan-600 mt-1.5 flex-shrink-0">•</span>
-                            <span className="leading-relaxed">{point}</span>
+                          <li
+                            key={pidx}
+                            className="flex gap-3 text-gray-700 leading-relaxed"
+                          >
+                            <span className="text-cyan-600 mt-1.5 flex-shrink-0">
+                              •
+                            </span>
+                            {point}
                           </li>
                         ))}
                       </ul>
                     </div>
                   ))}
+
+                  {/* 💡 Collapsible Formula Table for CPU Scheduling */}
+                  {topic.id === 'cpu-scheduling' && (
+                    <div className="mt-8">
+                      <button
+                        onClick={() => setShowFormula(!showFormula)}
+                        className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-teal-600 text-white px-4 py-2 rounded-lg font-medium hover:from-cyan-700 hover:to-teal-700 transition-all"
+                      >
+                        {showFormula ? (
+                          <ChevronDown className="w-5 h-5" />
+                        ) : (
+                          <ChevronRight className="w-5 h-5" />
+                        )}
+                        Quick Formula Reference
+                      </button>
+
+                      {showFormula && (
+                        <div className="overflow-x-auto mt-4 rounded-lg shadow-sm border border-gray-200">
+                          <table className="min-w-full text-sm text-gray-700 bg-white">
+                            <thead className="bg-gradient-to-r from-cyan-600 to-teal-600 text-white">
+                              <tr>
+                                <th className="px-4 py-2 text-left">Term</th>
+                                <th className="px-4 py-2 text-left">Formula</th>
+                                <th className="px-4 py-2 text-left">Meaning</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr className="border-b">
+                                <td className="px-4 py-2 font-semibold">
+                                  Turnaround Time (TAT)
+                                </td>
+                                <td className="px-4 py-2">
+                                  TAT = Completion Time − Arrival Time
+                                </td>
+                                <td className="px-4 py-2">
+                                  Total time from submission to completion
+                                </td>
+                              </tr>
+                              <tr className="border-b bg-gray-50">
+                                <td className="px-4 py-2 font-semibold">
+                                  Waiting Time (WT)
+                                </td>
+                                <td className="px-4 py-2">WT = TAT − Burst Time</td>
+                                <td className="px-4 py-2">
+                                  Time spent waiting in the ready queue
+                                </td>
+                              </tr>
+                              <tr className="border-b">
+                                <td className="px-4 py-2 font-semibold">
+                                  Response Time (RT)
+                                </td>
+                                <td className="px-4 py-2">
+                                  RT = First Response − Arrival Time
+                                </td>
+                                <td className="px-4 py-2">
+                                  Time until first CPU response
+                                </td>
+                              </tr>
+                              <tr className="border-b bg-gray-50">
+                                <td className="px-4 py-2 font-semibold">
+                                  Average TAT
+                                </td>
+                                <td className="px-4 py-2">Avg TAT = ΣTAT / n</td>
+                                <td className="px-4 py-2">
+                                  Mean turnaround time per process
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="px-4 py-2 font-semibold">
+                                  Average WT
+                                </td>
+                                <td className="px-4 py-2">Avg WT = ΣWT / n</td>
+                                <td className="px-4 py-2">
+                                  Mean waiting time per process
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {/* 🧮 Banker’s Algorithm Reference Table */}
+{topic.id === 'deadlock' && (
+  <div className="mt-8">
+    <button
+      onClick={() => setShowBankerTable(!showBankerTable)}
+      className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-teal-600 text-white px-4 py-2 rounded-lg font-medium hover:from-cyan-700 hover:to-teal-700 transition-all"
+    >
+      {showBankerTable ? (
+        <ChevronDown className="w-5 h-5" />
+      ) : (
+        <ChevronRight className="w-5 h-5" />
+      )}
+      Banker’s Algorithm Reference
+    </button>
+
+    {showBankerTable && (
+      <div className="overflow-x-auto mt-4 rounded-lg shadow-sm border border-gray-200">
+        <table className="min-w-full text-sm text-gray-700 bg-white">
+          <thead className="bg-gradient-to-r from-cyan-600 to-teal-600 text-white">
+            <tr>
+              <th className="px-4 py-2 text-left">Process</th>
+              <th className="px-4 py-2 text-left">Allocation</th>
+              <th className="px-4 py-2 text-left">Max</th>
+              <th className="px-4 py-2 text-left">Need</th>
+              <th className="px-4 py-2 text-left">Available</th>
+              <th className="px-4 py-2 text-left">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              <td className="px-4 py-2 font-semibold">P₀</td>
+              <td className="px-4 py-2">[0, 1, 0]</td>
+              <td className="px-4 py-2">[7, 5, 3]</td>
+              <td className="px-4 py-2">[7, 4, 3]</td>
+              <td className="px-4 py-2">[3, 3, 2]</td>
+              <td className="px-4 py-2">Can’t execute (Need > Available)</td>
+            </tr>
+            <tr className="border-b bg-gray-50">
+              <td className="px-4 py-2 font-semibold">P₁</td>
+              <td className="px-4 py-2">[2, 0, 0]</td>
+              <td className="px-4 py-2">[3, 2, 2]</td>
+              <td className="px-4 py-2">[1, 2, 2]</td>
+              <td className="px-4 py-2">[3, 3, 2]</td>
+              <td className="px-4 py-2">Can execute ✅ → releases resources</td>
+            </tr>
+            <tr className="border-b">
+              <td className="px-4 py-2 font-semibold">P₂</td>
+              <td className="px-4 py-2">[3, 0, 2]</td>
+              <td className="px-4 py-2">[9, 0, 2]</td>
+              <td className="px-4 py-2">[6, 0, 0]</td>
+              <td className="px-4 py-2">[5, 3, 2]</td>
+              <td className="px-4 py-2">Safe to execute → releases more</td>
+            </tr>
+            <tr className="border-b bg-gray-50">
+              <td className="px-4 py-2 font-semibold">P₃</td>
+              <td className="px-4 py-2">[2, 1, 1]</td>
+              <td className="px-4 py-2">[4, 2, 2]</td>
+              <td className="px-4 py-2">[2, 1, 1]</td>
+              <td className="px-4 py-2">[7, 4, 3]</td>
+              <td className="px-4 py-2">Executes → releases resources</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-semibold">P₄</td>
+              <td className="px-4 py-2">[0, 0, 2]</td>
+              <td className="px-4 py-2">[4, 3, 3]</td>
+              <td className="px-4 py-2">[4, 3, 1]</td>
+              <td className="px-4 py-2">[9, 5, 5]</td>
+              <td className="px-4 py-2">All processes can finish ✅</td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="bg-gray-50 text-gray-600 text-sm p-4 border-t border-gray-200">
+          <p><strong>Safe Sequence:</strong> P₁ → P₃ → P₂ → P₀ → P₄</p>
+          <p className="mt-1"><strong>Rule:</strong> A process can execute if Need ≤ Available; after completion, Available = Available + Allocation.</p>
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
                 </div>
               )}
             </div>
-          ))}
-        </div>
+          );
+        })}
+      </div>
+      
 
-        {/* Footer */}
-        <div className="mt-8 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-xl p-6 text-white text-center">
-          <p className="text-lg font-semibold">⚡ Pro Tip</p>
-          <p className="mt-2 text-cyan-100">Focus on numerical problems for CPU scheduling, paging calculations, and disk scheduling!</p>
-        </div>
+      {/* Footer */}
+      <div className="mt-8 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-xl p-6 text-white text-center">
+        <p className="text-lg font-semibold">⚡ Pro Tip</p>
+        <p className="mt-2 text-cyan-100">
+          Focus on numerical problems for CPU scheduling, paging calculations,
+          and disk scheduling!
+        </p>
       </div>
     </div>
-  );
+  </div>
+);
+;
 };
 
 export default OSNotes;

@@ -122,65 +122,77 @@ const TOCCDNotes = () => {
         }
       ]
     },
+    
+      {
+  id: 'cfg',
+  title: 'Context-Free Grammar',
+  icon: <Braces className="w-5 h-5" />,
+  content: [
     {
-      id: 'cfg',
-      title: 'Context-Free Grammar',
-      icon: <Braces className="w-5 h-5" />,
-      content: [
-        {
-          subtitle: 'CFG Basics',
-          points: [
-            'Tuple: G = (V, T, P, S) where V=variables, T=terminals, P=productions, S=start',
-            'Production: A → α where A ∈ V, α ∈ (V ∪ T)*',
-            'Derivation: Process of applying productions',
-            'Leftmost derivation: Always replace leftmost variable',
-            'Rightmost derivation: Always replace rightmost variable',
-            'Parse tree: Graphical representation of derivation'
-          ]
-        },
-        {
-          subtitle: 'Ambiguity',
-          points: [
-            'Grammar is ambiguous if some string has multiple parse trees',
-            'Equivalently: Multiple leftmost or rightmost derivations',
-            'Example: E → E+E | E*E | id is ambiguous',
-            'Some languages are inherently ambiguous',
-            'Ambiguity is undecidable in general',
-            'Solutions: Add precedence, associativity rules'
-          ]
-        },
-        {
-          subtitle: 'Chomsky Normal Form (CNF)',
-          points: [
-            'Productions: A → BC or A → a',
-            'A, B, C are variables, a is terminal',
-            'Every CFG can be converted to CNF',
-            'Steps: Eliminate ε, unit productions, useless symbols',
-            'Useful for: CYK parsing algorithm, proving pumping lemma'
-          ]
-        },
-        {
-          subtitle: 'Greibach Normal Form (GNF)',
-          points: [
-            'Productions: A → aα where a=terminal, α=string of variables',
-            'Every production generates at least one terminal',
-            'Every CFG can be converted to GNF',
-            'Derivation length = string length',
-            'Useful for converting to PDA'
-          ]
-        },
-        {
-          subtitle: 'CFG Properties',
-          points: [
-            'CFL closed under: Union, Concatenation, Kleene star, Reversal',
-            'CFL NOT closed under: Intersection, Complement',
-            'Intersection of CFL and Regular = CFL (closed)',
-            'L₁ = {aⁿbⁿcⁿ} is NOT context-free (use pumping lemma)',
-            'Decision: Membership (decidable), Emptiness (decidable), Finiteness (decidable)'
-          ]
-        }
+      subtitle: 'CFG Basics',
+      points: [
+        'Tuple: G = (V, T, P, S) where V=variables, T=terminals, P=productions, S=start',
+        'Production: A → α where A ∈ V, α ∈ (V ∪ T)*',
+        'Derivation: Process of applying productions',
+        'Leftmost derivation: Always replace leftmost variable',
+        'Rightmost derivation: Always replace rightmost variable',
+        'Parse tree: Graphical representation of derivation'
       ]
     },
+    {
+      subtitle: 'Ambiguity',
+      points: [
+        'Grammar is ambiguous if some string has multiple parse trees',
+        'Equivalently: Multiple leftmost or rightmost derivations',
+        'Example: E → E+E | E*E | id is ambiguous',
+        'Some languages are inherently ambiguous',
+        'Ambiguity is undecidable in general',
+        'Solutions: Add precedence, associativity rules'
+      ]
+    },
+    {
+      subtitle: 'CFG Simplification Steps',
+      points: [
+        'Remove ε-productions: Identify nullable variables, generate new productions omitting them, delete ε-productions',
+        'Remove Unit Productions: Replace A → B with productions of B',
+        'Remove Useless Symbols: Eliminate non-generating or unreachable symbols',
+        'Remove Inaccessible Symbols: Remove variables not reachable from the start symbol',
+        'Convert to Normal Form: CNF (A→BC or A→a), GNF (A→aα)'
+      ]
+    },
+    {
+      subtitle: 'Chomsky Normal Form (CNF)',
+      points: [
+        'Productions: A → BC or A → a',
+        'A, B, C are variables, a is terminal',
+        'Every CFG can be converted to CNF',
+        'Steps: Eliminate ε, unit productions, useless symbols',
+        'Useful for: CYK parsing algorithm, proving pumping lemma'
+      ]
+    },
+    {
+      subtitle: 'Greibach Normal Form (GNF)',
+      points: [
+        'Productions: A → aα where a=terminal, α=string of variables',
+        'Every production generates at least one terminal',
+        'Every CFG can be converted to GNF',
+        'Derivation length = string length',
+        'Useful for converting to PDA'
+      ]
+    },
+    {
+      subtitle: 'CFG Properties',
+      points: [
+        'CFL closed under: Union, Concatenation, Kleene star, Reversal',
+        'CFL NOT closed under: Intersection, Complement',
+        'Intersection of CFL and Regular = CFL (closed)',
+        'L₁ = {aⁿbⁿcⁿ} is NOT context-free (use pumping lemma)',
+        'Decision: Membership (decidable), Emptiness (decidable), Finiteness (decidable)'
+      ]
+    }
+  ]
+}
+,
     {
       id: 'pda',
       title: 'Pushdown Automata',
@@ -399,76 +411,86 @@ const TOCCDNotes = () => {
       ]
     },
     {
-      id: 'syntax-analysis',
-      title: 'Syntax Analysis (Parsing)',
-      icon: <GitBranch className="w-5 h-5" />,
-      content: [
-        {
-          subtitle: 'Parser Basics',
-          points: [
-            'Takes tokens from lexer',
-            'Builds parse tree or syntax tree',
-            'Checks if input follows grammar rules',
-            'Reports syntax errors',
-            'Two types: Top-down and Bottom-up'
-          ]
-        },
-        {
-          subtitle: 'Top-Down Parsing',
-          points: [
-            'Start from start symbol, derive input string',
-            'Leftmost derivation',
-            'Types: Recursive descent, Predictive parsing',
-            'LL(k): Left-to-right scan, Leftmost derivation, k lookahead',
-            'Cannot handle left recursion',
-            'Cannot handle ambiguous grammars'
-          ]
-        },
-        {
-          subtitle: 'Recursive Descent Parsing',
-          points: [
-            'Set of recursive procedures for each non-terminal',
-            'Simple to implement',
-            'May require backtracking',
-            'Inefficient if backtracking needed',
-            'Works well for simple grammars'
-          ]
-        },
-        {
-          subtitle: 'LL(1) Parsing',
-          points: [
-            'No backtracking needed',
-            'Uses parsing table',
-            'First set: First terminals that can start string',
-            'Follow set: Terminals that can come after non-terminal',
-            'Grammar must be LL(1): No left recursion, no ambiguity, no common prefixes',
-            'Left factoring: Remove common prefixes'
-          ]
-        },
-        {
-          subtitle: 'Bottom-Up Parsing',
-          points: [
-            'Start from input, reduce to start symbol',
-            'Rightmost derivation in reverse',
-            'More powerful than top-down',
-            'Types: LR(0), SLR, LALR, CLR',
-            'LR(k): Left-to-right, Rightmost derivation, k lookahead',
-            'Can handle more grammars than LL'
-          ]
-        },
-        {
-          subtitle: 'LR Parsing Variants',
-          points: [
-            'LR(0): Simplest, smallest class of grammars',
-            'SLR: Simple LR, uses follow sets',
-            'LALR: Look-Ahead LR, most commonly used (yacc, bison)',
-            'CLR (Canonical LR): Most powerful, largest tables',
-            'Power: LR(0) ⊂ SLR ⊂ LALR ⊂ CLR ⊂ All CFG',
-            'All handle more grammars than LL(1)'
-          ]
-        }
+  id: 'syntax-analysis',
+  title: 'Syntax Analysis (Parsing)',
+  icon: <GitBranch className="w-5 h-5" />,
+  content: [
+    {
+      subtitle: 'Parser Basics',
+      points: [
+        'Takes tokens from lexer',
+        'Builds parse tree or syntax tree',
+        'Checks if input follows grammar rules',
+        'Reports syntax errors',
+        'Two types: Top-down and Bottom-up'
       ]
     },
+    {
+      subtitle: 'Top-Down Parsing',
+      points: [
+        'Start from start symbol, derive input string',
+        'Leftmost derivation',
+        'Types: Recursive descent, Predictive parsing',
+        'LL(k): Left-to-right scan, Leftmost derivation, k lookahead',
+        'Cannot handle left recursion',
+        'Cannot handle ambiguous grammars',
+        'Left factoring required to remove common prefixes',
+        'Backtracking may be needed if grammar not LL(k)'
+      ]
+    },
+    {
+      subtitle: 'Recursive Descent Parsing',
+      points: [
+        'Set of recursive procedures for each non-terminal',
+        'Simple to implement',
+        'May require backtracking',
+        'Inefficient if backtracking needed',
+        'Works well for simple grammars'
+      ]
+    },
+    {
+      subtitle: 'LL(1) Parsing',
+      points: [
+        'No backtracking needed',
+        'Uses parsing table',
+        'First set: Terminals that can start a string derived from non-terminal',
+        'Follow set: Terminals that can appear immediately after a non-terminal',
+        'Grammar must be LL(1): No left recursion, no ambiguity, no common prefixes',
+        'Left factoring: Remove common prefixes',
+        'If grammar is LL(1), it is automatically L1 (deterministic context-free)',
+        'Conflicts: Table entries with multiple rules indicate grammar is not LL(1)'
+      ]
+    },
+    {
+      subtitle: 'Bottom-Up Parsing',
+      points: [
+        'Start from input, reduce to start symbol',
+        'Rightmost derivation in reverse',
+        'More powerful than top-down',
+        'Types: LR(0), SLR, LALR, CLR',
+        'LR(k): Left-to-right scan, Rightmost derivation, k lookahead',
+        'Can handle more grammars than LL(1)',
+        'Handles left recursion and some ambiguous constructs',
+        'Conflicts: Shift-Reduce and Reduce-Reduce indicate parsing table conflicts'
+      ]
+    },
+    {
+      subtitle: 'LR Parsing Variants',
+      points: [
+        'LR(0): No lookahead, simplest, smallest class of grammars',
+        'SLR: Simple LR, uses FOLLOW sets for reduce decisions',
+        'LALR(1): Look-Ahead LR, merges states of CLR, most commonly used (yacc, bison)',
+        'CLR (Canonical LR, or LR(1)): Most powerful, largest tables, uses full 1-symbol lookahead',
+        'Power hierarchy: LR(0) ⊂ SLR ⊂ LALR(1) ⊂ CLR(1) ⊂ All CFGs',
+        'L1 grammars: Deterministic context-free, can be parsed by some LR(1) parser',
+        'All LR parsers can handle more grammars than LL(1)',
+        'Conflicts (shift-reduce/reduce-reduce) show grammar is not LR(k)',
+        'If grammar is L1, it can be parsed by a deterministic LR(1) parser'
+      ]
+    }
+  ]
+}
+,
     {
       id: 'syntax-directed',
       title: 'Syntax Directed Translation',

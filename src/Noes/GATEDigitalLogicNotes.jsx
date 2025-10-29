@@ -13,19 +13,22 @@ const GATEDigitalLogicNotes = () => {
   };
 
   const subjects = {
-    numberSystems: {
-      name: 'Number Systems',
-      icon: <Binary className="w-6 h-6" />,
-      color: 'from-blue-500 to-blue-600',
-      topics: {
-        basics: title: 'Number Systems & Conversions',
-content: {
-  systems: [
-    'Binary (Base-2): 0, 1',
-    'Octal (Base-8): 0-7',
-    'Decimal (Base-10): 0-9',
-    'Hexadecimal (Base-16): 0-9, A-F'
-  ],
+  numberSystems: {
+    name: 'Number Systems',
+    icon: <Binary className="w-6 h-6" />,
+    color: 'from-blue-500 to-blue-600',
+    topics: {
+      basics: {
+        title: 'Number Systems & Conversions',
+        content: {
+          systems: [
+            'Binary (Base-2): 0, 1',
+            'Octal (Base-8): 0-7',
+            'Decimal (Base-10): 0-9',
+            'Hexadecimal (Base-16): 0-9, A-F'
+          ],
+          
+        
   conversions: [
     'Decimal to Binary: Divide by 2 repeatedly, collect remainders bottom-to-top',
     'Decimal to Octal: Divide by 8 repeatedly, collect remainders bottom-to-top',
