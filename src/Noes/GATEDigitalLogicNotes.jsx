@@ -18,37 +18,50 @@ const GATEDigitalLogicNotes = () => {
       icon: <Binary className="w-6 h-6" />,
       color: 'from-blue-500 to-blue-600',
       topics: {
-        basics: {
-          title: 'Number Systems & Conversions',
-          content: {
-            systems: [
-              'Binary (Base-2): 0, 1',
-              'Octal (Base-8): 0-7',
-              'Decimal (Base-10): 0-9',
-              'Hexadecimal (Base-16): 0-9, A-F',
-              'Decimal to Binary: Divide by 2, collect remainders',
-              'Binary to Octal: Group 3 bits from right',
-              'Binary to Hex: Group 4 bits from right'
-            ],
-            signed: [
-              'Sign-Magnitude: MSB=sign, rest=magnitude',
-              "1's Complement: Invert all bits. Two zeros exist",
-              "2's Complement: Invert + add 1. Most commonly used",
-              "2's complement advantages: Single zero, easy arithmetic",
-              "Subtraction: A-B = A + 2's complement of B"
-            ],
-            codes: [
-              'BCD: 4 bits per decimal digit. (25)₁₀ = (0010 0101)BCD',
-              'Gray Code: Adjacent numbers differ by 1 bit only',
-              'Binary to Gray: G₀=B₀, Gᵢ=Bᵢ XOR Bᵢ₊₁',
-              'Parity: Even/Odd. Detects single bit errors',
-              'Hamming Code: 2^r >= m+r+1. Corrects single bit errors'
-            ],
-            example: [
-              'Example: (13)₁₀=(1101)₂=(15)₈=(D)₁₆',
-              "2's complement of 5(0101) = 1011(-5)"
-            ]
-          }
+        basics: title: 'Number Systems & Conversions',
+content: {
+  systems: [
+    'Binary (Base-2): 0, 1',
+    'Octal (Base-8): 0-7',
+    'Decimal (Base-10): 0-9',
+    'Hexadecimal (Base-16): 0-9, A-F'
+  ],
+  conversions: [
+    'Decimal to Binary: Divide by 2 repeatedly, collect remainders bottom-to-top',
+    'Decimal to Octal: Divide by 8 repeatedly, collect remainders bottom-to-top',
+    'Decimal to Hexadecimal: Divide by 16 repeatedly, collect remainders bottom-to-top',
+    'Binary to Octal: Group bits in 3s from right, convert each group',
+    'Binary to Hexadecimal: Group bits in 4s from right, convert each group',
+    'Octal to Binary: Convert each digit to 3-bit binary',
+    'Hexadecimal to Binary: Convert each digit to 4-bit binary'
+  ],
+  signed: [
+    'Sign-Magnitude: MSB=sign, rest=magnitude',
+    "1's Complement: Invert all bits. Two zeros exist",
+    "2's Complement: Invert all bits + add 1. Most commonly used",
+    "2's Complement advantages: Single zero, easy arithmetic",
+    "Subtraction using 2\'s complement: A-B = A + 2\'s complement of B"
+  ],
+  codes: [
+    'BCD: 4 bits per decimal digit. Example: (25)₁₀ = (0010 0101)BCD',
+    'Gray Code: Adjacent numbers differ by 1 bit only',
+    'Binary to Gray: G₀ = B₀, Gᵢ = Bᵢ XOR Bᵢ₋₁',
+    'Gray to Binary: B₀ = G₀, Bᵢ = Bᵢ₋₁ XOR Gᵢ',
+    'Parity: Even/Odd. Detects single-bit errors',
+    'Hamming Code: 2^r >= m + r + 1. Corrects single-bit errors'
+  ],
+  examples: [
+    'Example: (13)₁₀ = (1101)₂ = (15)₈ = (D)₁₆',
+    "2's complement of 5 (0101) = 1011 (-5)"
+  ],
+  tips: [
+    'Quick Binary → Decimal: Sum powers of 2 for bits set to 1',
+    'Quick Octal → Decimal: Sum powers of 8 for each digit',
+    'Quick Hex → Decimal: Sum powers of 16 for each digit',
+    'Negative numbers in 2\'s complement: MSB=1, invert +1 to get magnitude'
+  ]
+}
+
         }
       }
     },

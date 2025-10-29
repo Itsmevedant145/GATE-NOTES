@@ -170,91 +170,110 @@ const CNNotes = () => {
         }
       ]
     },
+   {
+  id: 'network-layer',
+  title: 'Network Layer',
+  icon: <Globe className="w-5 h-5" />,
+  content: [
     {
-      id: 'network-layer',
-      title: 'Network Layer',
-      icon: <Globe className="w-5 h-5" />,
-      content: [
-        {
-          subtitle: 'IPv4 Basics',
-          points: [
-            '32-bit address, written as 4 octets (w.x.y.z)',
-            'Header: 20-60 bytes (20 bytes minimum)',
-            'Important fields: Version, IHL, Total Length, TTL, Protocol, Checksum',
-            'TTL (Time To Live): Prevents infinite loops, decremented at each router',
-            'Protocol field: TCP=6, UDP=17, ICMP=1',
-            'Fragmentation: If packet > MTU, split into fragments'
-          ]
-        },
-        {
-          subtitle: 'IP Address Classes',
-          points: [
-            'Class A: 0.0.0.0 to 127.255.255.255 (First bit 0, /8 default)',
-            'Class B: 128.0.0.0 to 191.255.255.255 (First bits 10, /16 default)',
-            'Class C: 192.0.0.0 to 223.255.255.255 (First bits 110, /24 default)',
-            'Class D: 224.0.0.0 to 239.255.255.255 (Multicast)',
-            'Class E: 240.0.0.0 to 255.255.255.255 (Reserved)',
-            'Loopback: 127.0.0.1',
-            'Private: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16'
-          ]
-        },
-        {
-          subtitle: 'Subnetting',
-          points: [
-            'CIDR Notation: IP/n where n = number of network bits',
-            'Subnet Mask: 1s for network, 0s for host',
-            'Number of subnets: 2^(borrowed bits)',
-            'Number of hosts per subnet: 2^(host bits) - 2',
-            'Network address: First address (all host bits 0)',
-            'Broadcast address: Last address (all host bits 1)',
-            'Valid host range: Network + 1 to Broadcast - 1'
-          ]
-        },
-        {
-          subtitle: 'IPv6',
-          points: [
-            '128-bit address (huge address space)',
-            'Written as 8 groups of 4 hex digits',
-            'No NAT needed, no broadcast (uses multicast)',
-            'Simplified header (fixed 40 bytes)',
-            'Built-in security (IPSec)',
-            'Auto-configuration support'
-          ]
-        },
-        {
-          subtitle: 'Routing Algorithms',
-          points: [
-            'Distance Vector: RIP, uses Bellman-Ford, shares routing table',
-            'Link State: OSPF, uses Dijkstra, shares link state info',
-            'Path Vector: BGP, used between AS (Autonomous Systems)',
-            'Static Routing: Manual configuration',
-            'Dynamic Routing: Automatic route updates',
-            'Interior Gateway Protocols: Within AS (RIP, OSPF)',
-            'Exterior Gateway Protocols: Between AS (BGP)'
-          ]
-        },
-        {
-          subtitle: 'ICMP (Internet Control Message Protocol)',
-          points: [
-            'Used for error reporting and diagnostics',
-            'Ping: Uses ICMP Echo Request/Reply',
-            'Traceroute: Uses ICMP Time Exceeded',
-            'Messages: Destination unreachable, Time exceeded, Redirect',
-            'Works at Network layer but uses IP'
-          ]
-        },
-        {
-          subtitle: 'ARP (Address Resolution Protocol)',
-          points: [
-            'Maps IP address to MAC address',
-            'ARP Request: Broadcast to find MAC',
-            'ARP Reply: Unicast response with MAC',
-            'ARP Cache: Stores IP-MAC mappings',
-            'RARP: Reverse ARP (MAC to IP, obsolete)'
-          ]
-        }
+      subtitle: 'IPv4 Basics',
+      points: [
+        '32-bit address, written as 4 octets (w.x.y.z)',
+        'Header: 20-60 bytes (20 bytes minimum)',
+        'Important fields: Version, IHL, Total Length, TTL, Protocol, Checksum',
+        'TTL (Time To Live): Prevents infinite loops, decremented at each router',
+        'Protocol field: TCP=6, UDP=17, ICMP=1',
+        'Fragmentation: If packet > MTU, split into fragments'
       ]
     },
+    {
+      subtitle: 'IP Address Classes',
+      points: [
+        'Class A: 0.0.0.0 to 127.255.255.255 (First bit 0, /8 default)',
+        'Class B: 128.0.0.0 to 191.255.255.255 (First bits 10, /16 default)',
+        'Class C: 192.0.0.0 to 223.255.255.255 (First bits 110, /24 default)',
+        'Class D: 224.0.0.0 to 239.255.255.255 (Multicast)',
+        'Class E: 240.0.0.0 to 255.255.255.255 (Reserved)',
+        'Loopback: 127.0.0.1',
+        'Private: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16'
+      ]
+    },
+    {
+      subtitle: 'Subnetting & Supernetting',
+      points: [
+        'Subnetting: Dividing a large network into smaller networks (subnets)',
+        'Supernetting: Combining multiple contiguous networks into a larger network',
+        'CIDR Notation: IP/n where n = number of network bits',
+        'Subnet Mask: 1s for network, 0s for host bits. Defines subnet boundary',
+        'Supernet Mask: Used in supernetting to cover multiple networks',
+        'Number of subnets: 2^(borrowed bits from host part)',
+        'Number of hosts per subnet: 2^(host bits) - 2 (exclude network & broadcast)',
+        'Network address: First address of subnet (all host bits 0)',
+        'Broadcast address: Last address of subnet (all host bits 1)',
+        'Valid host range: Network + 1 to Broadcast - 1',
+        'Difference between Subnet and Supernet:',
+        '  - Subnet: Break a network into smaller parts, increases routing granularity',
+        '  - Supernet: Merge multiple networks, reduces routing table size',
+        'Supernetting used in CIDR to efficiently allocate IP addresses'
+      ]
+    },
+    {
+      subtitle: 'IPv6',
+      points: [
+        '128-bit address (huge address space)',
+        'Written as 8 groups of 4 hex digits',
+        'No NAT needed, no broadcast (uses multicast)',
+        'Simplified header (fixed 40 bytes)',
+        'Built-in security (IPSec)',
+        'Auto-configuration support'
+      ]
+    },
+    {
+      subtitle: 'Routing Algorithms',
+      points: [
+        'Distance Vector: RIP, uses Bellman-Ford, shares routing table',
+        'Link State: OSPF, uses Dijkstra, shares link state info',
+        'Path Vector: BGP, used between AS (Autonomous Systems)',
+        'Static Routing: Manual configuration',
+        'Dynamic Routing: Automatic route updates',
+        'Interior Gateway Protocols: Within AS (RIP, OSPF)',
+        'Exterior Gateway Protocols: Between AS (BGP)'
+      ]
+    },
+    {
+      subtitle: 'ICMP (Internet Control Message Protocol)',
+      points: [
+        'Used for error reporting and diagnostics',
+        'Ping: Uses ICMP Echo Request/Reply',
+        'Traceroute: Uses ICMP Time Exceeded',
+        'Messages: Destination unreachable, Time exceeded, Redirect',
+        'Works at Network layer but uses IP'
+      ]
+    },
+    {
+      subtitle: 'ARP (Address Resolution Protocol)',
+      points: [
+        'Maps IP address to MAC address',
+        'ARP Request: Broadcast to find MAC',
+        'ARP Reply: Unicast response with MAC',
+        'ARP Cache: Stores IP-MAC mappings',
+        'RARP: Reverse ARP (MAC to IP, obsolete)'
+      ]
+    },
+    {
+      subtitle: 'Subnetting & Supernet Quick Tips',
+      points: [
+        'Borrowed bits increase number of subnets; host bits decrease hosts per subnet',
+        'Supernetting uses fewer bits for network part to combine multiple networks',
+        'CIDR allows flexible network allocation (not limited to classful boundaries)',
+        'Remember: Network address has host bits all 0, Broadcast address has host bits all 1',
+        'Subnet mask example: 255.255.255.192 = /26 (6 host bits)',
+        'Supernet mask example: 255.255.252.0 = /22 (merging 4 Class C networks)'
+      ]
+    }
+  ]
+}
+,
     {
       id: 'transport-layer',
       title: 'Transport Layer',
